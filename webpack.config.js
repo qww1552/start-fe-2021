@@ -1,14 +1,15 @@
 // webpack.config.js
 // `webpack` command will pick up this config setup by default
+
 var path = require('path');
 var HtmlWebpackPlugin = require("html-webpack-plugin");
 
 module.exports = {
   mode: 'none',
-  entry: './src/app.js',
+  entry: './src/js/app.js',
   output: {
     filename: 'main.js',
-    path: path.resolve(__dirname, 'dist')
+    path: path.resolve(__dirname, 'dist'),
   },   
   devServer: {
     contentBase: "./dist",
@@ -18,4 +19,12 @@ module.exports = {
         template: "./src/index.html",
     }),
 ],
+    module: {
+        rules: [
+            {
+                test: /\.css$/i,
+                use: ["style-loader", "css-loader"],
+            },
+        ],
+    },
 };
