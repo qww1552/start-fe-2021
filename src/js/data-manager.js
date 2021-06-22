@@ -1,4 +1,5 @@
 let classRowList = [];
+let quizRowList = [];
 
 async function loadClassData() {
     const response = await fetch("class.json");
@@ -11,9 +12,15 @@ async function loadClassData() {
             links : classRow.links,
             gitUrl : classRow.gitUrl,
             date : classRow.date
-        })
+        });
     }
     return classRowList;
+}
+
+async function loadQuizData() {
+    const response = await fetch("quiz.json");
+    quizRowList = await response.json();
+    return quizRowList;
 }
 
 function classFilter(keyword) {
@@ -21,37 +28,48 @@ function classFilter(keyword) {
         case "모두":
             return classRowList;
         case "도움링크":
-            return linkFilter();
+            return linkFilter(classRowList);
         case "git" :
             return gitFilter(classRowList);
         case "최신순" :
-            return null;
+            return recentFilter(classRowList);
     }
 }
 
-function linkFilter() {
+function quizFilter(keyword) {
+    switch(keyword) {
+        case "모두":
+            return quizRowList;
+        case "git" :
+            return gitFilter(quizRowList);
+    }
+}
+
+function linkFilter(items) {
     let result = [];
-    for (const classRow of classRowList) {
-        if (classRow.links.length > 0) {
-            result.push(classRow);
+    for (const item of items) {
+        if (item.links.length > 0) {
+            result.push(item);
         }
     }
     return result;
 }
 
-function gitFilter(list) {
+function gitFilter(items) {
     let result = [];
-    for (const row of list) {
-        if (row.gitUrl) {
-            result.push(row);
+    for (const item of items) {
+        if (item.gitUrl) {
+            result.push(item);
         }
     }
     return result;
 }
 
-async function loadQuizData() {
-    const response = await fetch("quiz.json");
-    return await response.json();
+function recentFilter(items) {
+    items.sort((a,b)=>{
+        return a.date > b.date ? -1 : a.date < b.date ? 1:0;
+    })
+    return items;
 }
 
-export {loadClassData,loadQuizData, classFilter}
+export {loadClassData,loadQuizData, classFilter, quizFilter}

@@ -1,4 +1,3 @@
-
 function createClassTable(data) {
   const table = data.map((classRow)=>{
     return createClassRow(classRow);

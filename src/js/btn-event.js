@@ -1,3 +1,6 @@
+import {classFilter, quizFilter} from "./data-manager"; 
+import * as HtmlRender from "./html-render";
+
 const $classBtnGroup = document.querySelectorAll(".btn-group")[0];
 const $classBtnList = $classBtnGroup.querySelectorAll("button");
 let prevClassBtn = $classBtnList[0];
@@ -17,7 +20,7 @@ function setClassBtnEvent() {
             prevClassBtn.classList.remove("active");    
             event.target.classList.add("active");
             prevClassBtn = event.target;
-            console.log(event.target.innerText);
+            HtmlRender.changeClassTable(classFilter(event.target.innerText));
         });
     }
 }
@@ -28,6 +31,7 @@ function setQuizBtnEvent() {
             prevQuizBtn.classList.remove("active");    
             event.target.classList.add("active");
             prevQuizBtn = event.target;
+            HtmlRender.changeQuizTable(quizFilter(event.target.innerText));
         });
     }
 }

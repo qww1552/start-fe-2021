@@ -20,6 +20,10 @@ async function renderClassTable() {
     $classTable.innerHTML = DomManager.createClassTable(classData);
 }
 
+function changeClassTable(data) {
+    $classTable.innerHTML = DomManager.createClassTable(data);
+}
+
 async function renderQuizTable() {
     $quizLoading.classList.remove("invisible");
     const quizData = await DataManager.loadQuizData();
@@ -28,4 +32,8 @@ async function renderQuizTable() {
     $quizTable.innerHTML = DomManager.createQuizTable(quizData);
 }
 
-export {init,renderClassTable,renderQuizTable};
+function changeQuizTable(data) {
+    $quizTable.innerHTML = DomManager.createQuizTable(data);
+}
+
+export {init,renderClassTable,renderQuizTable,changeClassTable,changeQuizTable};
