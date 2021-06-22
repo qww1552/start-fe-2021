@@ -1,21 +1,19 @@
-const $classTable = document.querySelectorAll("tbody")[0];
-const $quizTable = document.querySelectorAll("table")[1];
 
-function drawClassTable(data) {
+function createClassTable(data) {
   const table = data.map((classRow,index)=>{
-    return drawClassRow(index+1,classRow);
+    return createClassRow(classRow);
   });
-    $classTable.innerHTML = table.join("");
+  return table.join("");
 }
 
-function drawQuizTable(data) {
+function createQuizTable(data) {
   const table = data.map((quizRow,index)=>{
-    return drawQuizRow(quizRow);
+    return createQuizRow(quizRow);
   });
-  $quizTable.innerHTML = table.join("");
+  return table.join("");
 }
 
-function drawQuizRow(quizRow) {
+function createQuizRow(quizRow) {
   return `
   <tr>
     <td>${quizRow.title}</td>
@@ -27,10 +25,10 @@ function drawQuizRow(quizRow) {
   </tr>`
 }
 
-function drawClassRow(index,classRow) {
+function createClassRow(classRow) {
     let row =  `
     <tr>
-    <th scope="row">${index}</th>
+    <th scope="row">${classRow.week}</th>
     <td>${classRow.title}</td>
     <td>
     <a href="${classRow.docUrl}" class="badge bg-secondary">문서</a>
@@ -51,4 +49,4 @@ function drawClassRow(index,classRow) {
     return row;
     }
 
-export { drawClassTable, drawQuizTable }
+export { createClassTable, createQuizTable }
