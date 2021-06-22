@@ -1,5 +1,9 @@
 import '../css/app.css'
-import * as Render from "./render";
+import * as HtmlRender from "./html-render";
+import * as BtnEvent from "./btn-event"
 
-Render.render();
+window.onload = ()=>{
+    HtmlRender.init();
+    BtnEvent.init();
+}
 
