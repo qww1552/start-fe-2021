@@ -1,25 +1,54 @@
-function drawClassRow(data) {
+const $classTable = document.querySelectorAll("tbody")[0];
+const $quizTable = document.querySelectorAll("table")[1];
+
+function drawClassTable(data) {
+  const table = data.map((classRow,index)=>{
+    return drawClassRow(index+1,classRow);
+  });
+    $classTable.innerHTML = table.join("");
+}
+
+function drawQuizTable(data) {
+  const table = data.map((quizRow,index)=>{
+    return drawQuizRow(quizRow);
+  });
+  $quizTable.innerHTML = table.join("");
+}
+
+function drawQuizRow(quizRow) {
+  return `
+  <tr>
+    <td>${quizRow.title}</td>
+    <td>
+      <a class="badge bg-secondary" href="${quizRow.docUrl}">문서</a>
+    </td>
+    <td><a href="${quizRow.previewUrl}">보기</a></td>
+    <td><a href="${quizRow.gitUrl}">git</a></td>
+  </tr>`
+}
+
+function drawClassRow(index,classRow) {
     let row =  `
     <tr>
-    <th scope="row">3</th>
-    <td>${data.title}</td>
+    <th scope="row">${index}</th>
+    <td>${classRow.title}</td>
     <td>
-    <a href="${data.docUrl}" class="badge bg-secondary">문서</a>
+    <a href="${classRow.docUrl}" class="badge bg-secondary">문서</a>
     </td>
     `;
     row +=`<td>`;
-    for (let i = 0; i < data.links.length; i++) {
-       row += `<a href="${data.links[i]}" class="badge bg-secondary">${i+1}</a>` 
+    for (let i = 0; i < classRow.links.length; i++) {
+       row += `<a href="${classRow.links[i]}" class="badge bg-secondary">${i+1}</a>` 
     }
     row += `</td>`;
     row += `
-    <td>${data.date}</td>
+    <td>${classRow.date}</td>
     <td>
-      <a href="${data.gitUrl}">git</a>
+      <a href="${classRow.gitUrl}">git</a>
     </td>
     </tr>
     `
     return row;
     }
 
-export {drawClassRow}
+export { drawClassTable, drawQuizTable }
