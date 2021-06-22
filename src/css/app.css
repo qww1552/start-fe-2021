@@ -14,3 +14,6 @@ a.badge {
   justify-content: space-between;
 }
 
+.invisible {
+  display: none;
+}
