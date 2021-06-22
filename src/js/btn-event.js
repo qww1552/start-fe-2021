@@ -17,7 +17,8 @@ function setClassBtnEvent() {
             prevClassBtn.classList.remove("active");    
             event.target.classList.add("active");
             prevClassBtn = event.target;
-        })
+            console.log(event.target.innerText);
+        });
     }
 }
 
@@ -27,6 +28,6 @@ function setQuizBtnEvent() {
             prevQuizBtn.classList.remove("active");    
             event.target.classList.add("active");
             prevQuizBtn = event.target;
-        })
+        });
     }
 }

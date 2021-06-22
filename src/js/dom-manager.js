@@ -1,13 +1,13 @@
 
 function createClassTable(data) {
-  const table = data.map((classRow,index)=>{
+  const table = data.map((classRow)=>{
     return createClassRow(classRow);
   });
   return table.join("");
 }
 
 function createQuizTable(data) {
-  const table = data.map((quizRow,index)=>{
+  const table = data.map((quizRow)=>{
     return createQuizRow(quizRow);
   });
   return table.join("");
