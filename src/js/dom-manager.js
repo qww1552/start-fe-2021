@@ -1,15 +1,7 @@
-function createClassTable(data) {
-  const table = data.map((classRow)=>{
-    return createClassRow(classRow);
-  });
-  return table.join("");
-}
-
-function createQuizTable(data) {
-  const table = data.map((quizRow)=>{
-    return createQuizRow(quizRow);
-  });
-  return table.join("");
+function createTable(data, createHtml) {
+  return data.map((row)=> {
+    return createHtml(row);
+  }).join("");
 }
 
 function createQuizRow(quizRow) {
@@ -25,27 +17,30 @@ function createQuizRow(quizRow) {
 }
 
 function createClassRow(classRow) {
-    let row =  `
+    return `
     <tr>
     <th scope="row">${classRow.week}</th>
     <td>${classRow.title}</td>
     <td>
     <a href="${classRow.docUrl}" class="badge bg-secondary">문서</a>
     </td>
-    `;
-    row +=`<td>`;
-    for (let i = 0; i < classRow.links.length; i++) {
-       row += `<a href="${classRow.links[i]}" class="badge bg-secondary">${i+1}</a>` 
-    }
-    row += `</td>`;
-    row += `
+    <td>${classRow.links.map((link, i) => { 
+      return `<a href="${link}" class="badge bg-secondary">${i+1}</a>`
+    }).join("")}</td>
     <td>${classRow.date}</td>
     <td>
       <a href="${classRow.gitUrl}">git</a>
     </td>
     </tr>
     `
-    return row;
     }
+
+function createClassTable(data) {
+  return createTable(data,createClassRow);
+}
+
+function createQuizTable(data) {
+  return createTable(data,createQuizRow);
+}
 
 export { createClassTable, createQuizTable }
